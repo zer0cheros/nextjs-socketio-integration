@@ -19,7 +19,7 @@ NextApp.prepare().then(()=>{
             console.log('user disconnected', socket.id)
         })
         socket.on('chat', (msg)=>{
-            console.log('message: ' + msg)
+            //console.log('message: ' + msg)
             io.emit('chat', msg)
         })
     })

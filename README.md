@@ -21,9 +21,11 @@ This project showcases the powerful combination of [Next.js](https://nextjs.org/
 To get started with this project, clone the repository and install the dependencies:
 
 ```bash
-git clone 
+git clone https://github.com/zer0cheros/nextjs-socketio-integration.git 
 cd nextjs-socketio-integration
 npm install
 npm run dev
 ```
+
+Open up two or more tabs with [http://localhost:3000](http://localhost:3000). This project demonstrates a simple state updating using Socket.IO for real-time communication.
 
