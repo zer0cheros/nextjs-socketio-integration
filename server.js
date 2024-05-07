@@ -12,17 +12,26 @@ NextApp.prepare().then(()=>{
     const server = createServer((req, res)=>{
         nextHandler(req, res);
     })
+    const roomMessages = {};
     const io = new Server(server)
-    io.on('connection', (socket)=>{
-        console.log('a user connected' + socket.id)
-        socket.on('disconnect', ()=>{
-            console.log('user disconnected', socket.id)
-        })
-        socket.on('chat', (msg)=>{
-            //console.log('message: ' + msg)
-            io.emit('chat', msg)
-        })
-    })
+    io.on('connection', (socket) => {
+        console.log('A user connected:', socket.id);
+    
+        socket.on('join-room', (data) => {
+            const { id } = data;
+            socket.join(id);
+            const existingMessages = roomMessages[id] || '';
+            socket.emit('chat', existingMessages);
+        });
+        socket.on('chat', (data) => {
+            const { id, msg } = data;
+            roomMessages[id] = msg;
+            io.to(id).emit('chat', msg);
+        });
+        socket.on('disconnect', () => {
+            console.log('User disconnected:', socket.id);
+        });
+    });
     // io.on('disconnect', (socket)=>{
     //     console.log('user disconnected')
     // })
