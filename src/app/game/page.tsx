@@ -2,7 +2,7 @@
 import React, {useEffect, useRef} from 'react'
 import { io } from 'socket.io-client'
 import Matter from 'matter-js'
-
+ 
 export default function Game() {
     const CanvasRef = useRef<HTMLCanvasElement>(null)  
     useEffect(()=>{
